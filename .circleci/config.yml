@@ -2,7 +2,6 @@
 version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
-
 jobs:
   test:
     docker:
@@ -11,5 +10,9 @@ jobs:
       - checkout
       - run: mix do compile --warnings-as-errors, coveralls.json
       - codecov/upload:
-        file: "./coveralls.json"
-        token: "f0ab5451-efeb-4c8a-8f45-5f699c9db5ce"
+          file: "./coveralls.json"
+          token: "f0ab5451-efeb-4c8a-8f45-5f699c9db5ce"
+workflows:
+  test:
+    jobs:
+      - test
