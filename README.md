@@ -9,24 +9,26 @@ This repository serves as an **example** on how to use [Codecov Global][4] for E
 
 Add [excoveralls](https://hex.pm/packages/excoveralls) to your mix.exs deps.
 
-# Travis CI
+# Circle CI
 
-Add to your `.travis.yml` file.
+Add to your `.circleci/config.yml` file.
 ```yml
-language: elixir
-elixir:
-  - 1.3.4
-otp_release:
-  - 19.1
+# Check https://circleci.com/docs/2.0/language-elixir/ for more details
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
 
-script:
-  - MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+jobs:
+  test:
+    docker:
+      - image: circleci/elixir:1.11.2
+    steps:
+      - checkout
+      - run: mix do compile --warnings-as-errors, coveralls.json
+      - codecov/upload:
+        file: "./coveralls.json"
+        token: "f0ab5451-efeb-4c8a-8f45-5f699c9db5ce"
 ```
-
-See the [Travis CI documentation](https://docs.travis-ci.com/user/languages/elixir/) for more information.
 
 
 View source and learn more about [Codecov Global Uploader][4]
