@@ -8,7 +8,10 @@ jobs:
       - image: circleci/elixir:1.11.2
     steps:
       - checkout
-      - run: mix do compile --warnings-as-errors, coveralls.json
+      - run: mix local.hex --force
+      - run: mix deps.get
+      - run: mix compile --warnings-as-errors
+      - run: mix coveralls.json
       - codecov/upload:
           file: "./coveralls.json"
           token: "f0ab5451-efeb-4c8a-8f45-5f699c9db5ce"
