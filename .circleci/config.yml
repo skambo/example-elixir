@@ -12,4 +12,4 @@ jobs:
 
       - codecov/upload:
         file: "./coveralls.json"
-        token: f0ab5451-efeb-4c8a-8f45-5f699c9db5ce
+        token: "f0ab5451-efeb-4c8a-8f45-5f699c9db5ce"
