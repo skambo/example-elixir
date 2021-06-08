@@ -8,10 +8,8 @@ jobs:
     docker:
       - image: circleci/elixir:1.11.2
     steps:
-      - run:
-        name: Run tests
-        command: mix do compile --warnings-as-errors, coveralls.json
-
+      - checkout
+      - run: mix do compile --warnings-as-errors, coveralls.json
       - codecov/upload:
         file: "./coveralls.json"
         token: "f0ab5451-efeb-4c8a-8f45-5f699c9db5ce"
