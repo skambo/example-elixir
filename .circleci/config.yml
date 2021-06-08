@@ -5,6 +5,8 @@ orbs:
 
 jobs:
   test:
+    docker:
+      - image: circleci/elixir:1.11.2
     steps:
       - run:
         name: Run tests
